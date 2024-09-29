@@ -5,7 +5,15 @@
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
-      *) return;;
+
+      *)
+    if [[ -n "$SSH_CLIENT" ]]; then
+        if [[ -e ~/.sshrc ]]; then
+            . ~/.sshrc
+        fi
+    fi
+    return
+    ;;
 esac
 
 # don't put duplicate lines or lines starting with space in the history.
