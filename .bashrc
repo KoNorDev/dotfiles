@@ -120,3 +120,12 @@ GIT_PS1_SHOWSTASHSTATE=1
 if [ -f ~/dotfiles/git-prompt.sh ]; then
     . ~/dotfiles/git-prompt.sh
 fi
+
+if [ -n "$SSH_CLIENT" ]; then
+    if [[ "${SSH_CLIENT%% *}" =~ ":" ]]; then
+        # _display=${SSH_CLIENT%% *}
+        export DISPLAY="[${SSH_CLIENT%% *}]:0.0"
+    else
+        export DISPLAY="${SSH_CLIENT%% *}:0.0"
+    fi
+fi
